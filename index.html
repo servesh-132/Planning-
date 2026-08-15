@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>यूपी बोर्ड 10वीं चेकलिस्ट</title>
+</head>
+<body style="margin:0; padding:16px; background-color:#f7f1e1; font-family:sans-serif; color:#232016;">
+
+<div style="max-width:680px; margin:0 auto;">
+
+  <div style="background-color:#efe6cf; border:2px solid #1b3a6b; border-radius:8px; padding:16px;">
+    <div style="font-size:12px; color:#c0392b; font-weight:bold;">प्रवेश पत्र - फाइनल रिवीज़न</div>
+    <div style="font-weight:bold; font-size:24px; color:#1b3a6b; margin-top:4px;">यूपी बोर्ड कक्षा 10वीं</div>
+    <div style="font-size:14px; color:#7a7568; margin-top:6px;">फाइनल तैयारी चेकलिस्ट - हर सवाल को टिक करते जाओ।</div>
+    <div style="font-size:13px; color:#7a7568; margin-top:14px;">तैयारी प्रगति: <b id="progressText" style="color:#1b3a6b;">0 / 28</b></div>
+    <div style="height:14px; border:1.5px solid #1b3a6b; border-radius:3px; background-color:#ffffff; margin-top:6px;">
+      <div id="progressFill" style="height:100%; width:0%; background-color:#1b3a6b;"></div>
+    </div>
+    <div id="topStamp" style="display:none; text-align:center; color:#c0392b; font-weight:bold; font-size:14px; border:2px solid #c0392b; border-radius:8px; padding:6px; margin-top:12px;">
+      पूरी तैयारी हो गई!
+    </div>
+  </div>
+
+  <div id="subjects"></div>
+
+  <div style="text-align:center; font-size:14px; color:#7a7568; margin-top:20px; padding-bottom:20px;">
+    हर टिक एक कदम पास होने के करीब है
+  </div>
+
+</div>
+
+<div id="overlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(27,25,15,0.6); text-align:center; padding-top:80px;">
+  <div style="background-color:#fffef8; border:5px solid #2f6b4f; border-radius:16px; max-width:280px; margin:0 auto; padding:24px;">
+    <div style="font-size:26px; font-weight:bold; color:#2f6b4f;">उत्तीर्ण</div>
+    <div style="font-size:13px; color:#2f6b4f; margin-top:8px;">तैयारी पूरी हुई! ऑल द बेस्ट!</div>
+    <div style="margin-top:16px;">
+      <button onclick="document.getElementById('overlay').style.display='none';" style="font-size:13px; padding:8px 18px; border-radius:20px; border:1px solid #2f6b4f; background-color:#ffffff; color:#2f6b4f;">बंद करें</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var DATA = [
+  { title:"1. गणित (Mathematics) - लगभग 35 अंक", items:[
+    "वास्तविक संख्याएं: वर्गमूल 2, 3, 5 को अपरिमेय सिद्ध करना आता है?",
+    "बीजगणित: मूलों की प्रकृति, k का मान निकालना और नाव-धारा/उम्र वाले इबारती सवाल सीख लिए हैं?",
+    "निर्देशांक ज्यामिति: बीच की दूरी और विभाजन सूत्र के सवाल पक्के हैं?",
+    "त्रिकोणमिति के अनुप्रयोग: ऊंचाई और दूरी के 6 नंबर वाले लॉन्ग प्रश्न की प्रैक्टिस की है?",
+    "सांख्यिकी: बारंबारता सारणी से माध्य, माध्यिका और बहुलक निकालना कंठस्थ है?",
+    "PYQs: पिछले 3 साल के सभी 7 सेट्स के गणित के पेपर्स हल कर लिए हैं?"
+  ]},
+  { title:"2. विज्ञान (Science) - लगभग 30 अंक", items:[
+    "जैव प्रक्रम: मानव पाचन तंत्र, हृदय और उत्सर्जन तंत्र का सचित्र वर्णन याद है?",
+    "विद्युत: ओह्म का नियम और श्रेणीक्रम/समांतर क्रम के न्यूमेरिकल्स की प्रैक्टिस की है?",
+    "प्रकाश: अवतल/उतल दर्पण और लेंस द्वारा प्रतिबिंब बनने का किरण आरेख आता है?",
+    "कार्बन एवं यौगिक: IUPAC नामकरण, साबुनीकरण और एस्टरीकरण की अभिक्रियाएं याद हैं?",
+    "धातु एवं अधातु: भर्जन, निस्तापन और सक्रियता श्रेणी के कॉन्सेप्ट्स क्लियर हैं?"
+  ]},
+  { title:"3. सामाजिक विज्ञान (SST) - लगभग 25 अंक", items:[
+    "भारत में राष्ट्रवाद: असहयोग आंदोलन, सविनय अवज्ञा और जलियांवाला बाग के पॉइंट्स याद हैं?",
+    "यूरोप में राष्ट्रवाद: इटली और जर्मनी का एकीकरण याद कर लिया है?",
+    "संघवाद: केंद्र और राज्यों के बीच शक्तियों का बंटवारा समझ लिया है?",
+    "मानचित्र कार्य: इतिहास-भूगोल के महत्वपूर्ण स्थान नक्शे पर भरने की प्रैक्टिस की है?",
+    "MCQs: ओएमआर के लिए इतिहास, भूगोल और नागरिक शास्त्र के प्रश्न तैयार हैं?"
+  ]},
+  { title:"4. हिंदी (Hindi) - लगभग 35 अंक", items:[
+    "जीवन परिचय: लेखक (शुक्ल, प्रसाद) और कवि (सूरदास, तुलसीदास, महादेवी) याद हैं?",
+    "संस्कृत खंड: वाराणसी और भारतीय संस्कृतिः पाठ का हिंदी अनुवाद आता है?",
+    "काव्य सौंदर्य: रस, अलंकार और छंद की परिभाषा व उदाहरण याद हैं?",
+    "लेखन कार्य: निबंध लेखन और पत्र लेखन का सही फॉर्मेट पता है?",
+    "20 MCQs: उपसर्ग, प्रत्यय, समास और तत्सम-तद्भव के प्रश्न पक्के हैं?"
+  ]},
+  { title:"5. अंग्रेजी (English) - लगभग 25 अंक", items:[
+    "Writing: Application (Leave/Fee) aur Article (Pollution/Ideal Teacher) likhna aata hai?",
+    "Grammar: Direct/Indirect Speech, Voice aur Translation ke niyam pakke hain?",
+    "Literature: A Letter to God aur Nelson Mandela ke long answer yaad hain?",
+    "Poetry: kisi kavita ki 4 lines aur Dust of Snow/Fire and Ice ka Central Idea yaad hai?"
+  ]},
+  { title:"6. चित्रकला (Art) - लगभग 70 अंक", items:[
+    "OMR थ्योरी: ओस्टवाल्ड रंग चक्र, प्राथमिक/द्वितीयक और ठंडे/गर्म रंगों के सवाल याद हैं?",
+    "मुख्य आलेखन: वृत्त/आयत में कमल-सूरजमुखी के साथ हंस/बत्तख बनाकर वॉटर कलर की प्रैक्टिस है?",
+    "स्मृति चित्रण: पेंसिल से आम, सुराही, कप-प्लेट और खुली किताब बनाकर शेडिंग करना आता है?"
+  ]}
+];
+
+var subjectsDiv = document.getElementById('subjects');
+var totalItems = 0;
+var checkedCount = 0;
+
+for (var s = 0; s < DATA.length; s++) {
+  totalItems += DATA[s].items.length;
+
+  var box = document.createElement('div');
+  box.style.border = "1px solid #cfc5a3";
+  box.style.borderRadius = "8px";
+  box.style.padding = "12px 14px";
+  box.style.marginTop = "18px";
+  box.style.backgroundColor = "#ffffff90";
+
+  var titleDiv = document.createElement('div');
+  titleDiv.style.fontWeight = "bold";
+  titleDiv.style.fontSize = "16px";
+  titleDiv.style.color = "#1b3a6b";
+  titleDiv.style.marginBottom = "8px";
+  titleDiv.textContent = DATA[s].title;
+  box.appendChild(titleDiv);
+
+  for (var i = 0; i < DATA[s].items.length; i++) {
+    var row = document.createElement('div');
+    row.style.borderTop = "1px solid #eee2c4";
+    row.style.padding = "8px 0";
+
+    var checkbox = document.createElement('input');
+    checkbox.type = "checkbox";
+    checkbox.id = "chk-" + s + "-" + i;
+    checkbox.style.marginRight = "8px";
+    checkbox.style.verticalAlign = "top";
+    checkbox.style.width = "18px";
+    checkbox.style.height = "18px";
+    checkbox.onchange = (function(cb){
+      return function(){
+        if (cb.checked) { checkedCount++; } else { checkedCount--; }
+        updateProgress();
+      };
+    })(checkbox);
+
+    var label = document.createElement('label');
+    label.htmlFor = checkbox.id;
+    label.style.fontSize = "14px";
+    label.style.lineHeight = "1.5";
+    label.textContent = DATA[s].items[i];
+
+    row.appendChild(checkbox);
+    row.appendChild(label);
+    box.appendChild(row);
+  }
+
+  subjectsDiv.appendChild(box);
+}
+
+document.getElementById('progressText').textContent = "0 / " + totalItems;
+
+function updateProgress() {
+  var pct = Math.round((checkedCount / totalItems) * 100);
+  document.getElementById('progressFill').style.width = pct + "%";
+  document.getElementById('progressText').textContent = checkedCount + " / " + totalItems;
+  if (pct === 100) {
+    document.getElementById('topStamp').style.display = "block";
+    document.getElementById('overlay').style.display = "block";
+  } else {
+    document.getElementById('topStamp').style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>
